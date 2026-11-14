@@ -7,8 +7,9 @@ public class QuickTimeEvents : MonoBehaviour
     public char TargetKey;
 
     public char[] QuickTimeKeys = {'E','F','M','T','A'};
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+
     void Start()
     {
         Debug.Log("Start Mashing!");
@@ -66,3 +67,4 @@ public class QuickTimeEvents : MonoBehaviour
         KeyPressedAmount = 0;
     }
 }
+
