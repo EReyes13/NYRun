@@ -31,4 +31,9 @@ public class PlayerScript : MonoBehaviour
         CanJump = false;
         Debug.Log("In Air");
     }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        GameManager.Instance.StartQuickEvent();
+    }
 }
