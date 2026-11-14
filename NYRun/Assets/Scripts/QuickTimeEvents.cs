@@ -12,8 +12,7 @@ public class QuickTimeEvents : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start Mashing!");
-        QuickTimeEventStart();
+        
     }
 
     // Update is called once per frame
@@ -65,6 +64,7 @@ public class QuickTimeEvents : MonoBehaviour
     {
         Debug.Log("You Did It!");
         KeyPressedAmount = 0;
+        GameManager.Instance.EndQuickEvent();
     }
 }
 
