@@ -1869,7 +1869,9 @@ MonoBehaviour:
   Backgrounds:
   - {fileID: 438575276}
   - {fileID: 307685148}
-  Foregrounds: []
+  Foregrounds:
+  - {fileID: 1499349880}
+  - {fileID: 1405157713}
   MiniGame: {fileID: 1569064965}
 --- !u!4 &1555321101
 Transform:
