@@ -1,0 +1,5 @@
+obstacle spawner
+
+most items will need triggers and will need to call to them
+
+add a countdown to the beginning of the game 
