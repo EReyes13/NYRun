@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public float TimerCountdown = 60;
     public PlayerScript Player;
     public OngoingScreen Environment;
+
+    public QuickTimeEvents MiniGame;
     
     void Awake()
     {
@@ -29,6 +31,13 @@ public class GameManager : MonoBehaviour
 
     public void StartQuickEvent()
     {
-        
+        Environment.scrollSpeed = 0;
+        MiniGame.QuickTimeEventStart();
+
+    }
+
+    public void EndQuickEvent()
+    {
+        Environment.scrollSpeed = 2f;
     }
 }
