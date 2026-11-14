@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public PlayerScript Player;
 
     public OngoingScreen[] Backgrounds;
+    public OngoingScreen[] Foregrounds;
     // public OngoingScreen Environment;
 
     public QuickTimeEvents MiniGame;
@@ -38,6 +39,10 @@ public class GameManager : MonoBehaviour
         {
             Screen.ChangeSpeed(0);
         }
+        foreach (OngoingScreen Screen in Foregrounds)
+        {
+            Screen.ChangeSpeed(0);
+        }
         MiniGame.QuickTimeEventStart();
 
     }
@@ -47,6 +52,10 @@ public class GameManager : MonoBehaviour
         foreach (OngoingScreen Screen in Backgrounds)
         {
             Screen.ChangeSpeed(2);
+        }
+        foreach (OngoingScreen Screen in Foregrounds)
+        {
+            Screen.ChangeSpeed(8);
         }
     }
 }
