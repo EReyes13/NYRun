@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -8,7 +9,11 @@ public class GameManager : MonoBehaviour
     public float TimeElapsed;
     public float TimerCountdown = 60;
     public PlayerScript Player;
-    public OngoingScreen Environment;
+
+    public OngoingScreen[] Backgrounds;
+    // public OngoingScreen Environment;
+
+    public QuickTimeEvents MiniGame;
     
     void Awake()
     {
@@ -29,6 +34,19 @@ public class GameManager : MonoBehaviour
 
     public void StartQuickEvent()
     {
-        
+        foreach (OngoingScreen Screen in Backgrounds)
+        {
+            Screen.ChangeSpeed(0);
+        }
+        MiniGame.QuickTimeEventStart();
+
+    }
+
+    public void EndQuickEvent()
+    {
+        foreach (OngoingScreen Screen in Backgrounds)
+        {
+            Screen.ChangeSpeed(2);
+        }
     }
 }
