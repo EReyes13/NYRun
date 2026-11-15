@@ -1,7 +1,7 @@
 
-
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     public string IdleAnimation = "Idle";
     public string ReadyAnimation = "Ready";
     public string RunningAnimation = "Running";
+    public string HitAnimation = "Hit";
+
+    public float HitAnimationDuration = 0.5f;
 
     public OngoingScreen[] Backgrounds;
     public OngoingScreen[] Foregrounds;
@@ -27,6 +30,17 @@ public class GameManager : MonoBehaviour
 
     public QuickTimeEvents MiniGame;
 
+    // Yankee Stadium
+    public GameObject YankeeStadium;
+    public int ObstaclesBeforeStadium = 5;
+
+    // Obstacle counters
+    public int HitsBeforeRestart = 4;
+
+    private int ObstaclesAvoided = 0;
+    private int PlayerHits = 0;
+
+    private bool StadiumMoving = false;
     private bool QuickEventActive = false;
 
     void Awake()
@@ -46,6 +60,12 @@ public class GameManager : MonoBehaviour
         // Save the original speeds before stopping everything
         SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
         SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
+
+        // Keep Yankee Stadium hidden at the start
+        if (YankeeStadium != null)
+        {
+            YankeeStadium.SetActive(false);
+        }
 
         StartCoroutine(GameStartSequence());
     }
@@ -122,7 +142,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        // Move Yankee Stadium from right to left
+        if (StadiumMoving && YankeeStadium != null)
+        {
+            YankeeStadium.transform.Translate(
+                Vector3.left * Backgrounds[0].scrollSpeed * Time.deltaTime
+            );
+        }
     }
 
     public void StartQuickEvent()
@@ -132,9 +158,10 @@ public class GameManager : MonoBehaviour
 
         QuickEventActive = true;
 
-        //Save current speed in order to preserve momentum
+        // Save current speed in order to preserve momentum
         SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
-        SavedForegroundSpeed = Foregrounds[0].scrollSpeed; 
+        SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
+
         // Stop backgrounds
         foreach (OngoingScreen Screen in Backgrounds)
         {
@@ -210,21 +237,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Triggers when the player hits an obstacle that has the obstacle tag on it 
+    // Called when the player avoids an obstacle
+    public void ObstacleAvoided()
+    {
+        ObstaclesAvoided++;
+
+        if (ObstaclesAvoided >= ObstaclesBeforeStadium && !StadiumMoving)
+        {
+            if (YankeeStadium != null)
+            {
+                YankeeStadium.SetActive(true);
+                StadiumMoving = true;
+            }
+        }
+    }
+
+    // Called when the player hits an obstacle
     public void ObstacleHit()
     {
-        //The player will lose momentum
+        PlayerHits++;
+
+        // Play Hit animation
+        if (PlayerAnimator != null && !QuickEventActive)
+        {
+            StopCoroutine(nameof(PlayHitAnimation));
+            StartCoroutine(PlayHitAnimation());
+        }
+
+        // The player will lose momentum
         foreach (OngoingScreen Screen in Backgrounds)
         {
             Screen.ChangeSpeed(-1);
         }
 
-        // Resume foregrounds and increase total speed
+        // Reduce foreground speed
         foreach (OngoingScreen Screen in Foregrounds)
         {
             Screen.ChangeSpeed(-2);
         }
-        
+
+        // Restart level after three hits
+        if (PlayerHits >= HitsBeforeRestart)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    IEnumerator PlayHitAnimation()
+    {
+        PlayerAnimator.Play(HitAnimation, 0, 0);
+
+        yield return new WaitForSeconds(HitAnimationDuration);
+
+        if (!QuickEventActive)
+        {
+            PlayerAnimator.Play(RunningAnimation, 0, 0);
+        }
     }
 
     // private void OnTriggerEnter2D(Collider2D collision)

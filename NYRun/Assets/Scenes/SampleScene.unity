@@ -354,7 +354,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_MaskInteraction: 0
   m_Sprite: {fileID: -4177448557180558250, guid: c9cdeec4ab2135f4a92e57981e2eb749, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1534,7 +1534,7 @@ Transform:
   m_GameObject: {fileID: 778943770}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48, y: -5.12, z: 0}
+  m_LocalPosition: {x: 0.45, y: -5.12, z: 0}
   m_LocalScale: {x: 18.824257, y: 0.6212245, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1551,12 +1551,12 @@ GameObject:
   - component: {fileID: 917589931}
   - component: {fileID: 917589930}
   m_Layer: 0
-  m_Name: yankee_stad_TEST_0
+  m_Name: yankee_stadium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &917589930
 SpriteRenderer:
   serializedVersion: 3
@@ -1604,9 +1604,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5927813804252302556, guid: 77aa1932a60c1bb479c0345e6879ca62, type: 3}
+  m_Sprite: {fileID: -3633746604601106583, guid: f351a20a5eb9b1e4486ce9c94d068a44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1626,8 +1626,8 @@ Transform:
   m_GameObject: {fileID: 917589929}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.57, y: -1.31, z: 0}
-  m_LocalScale: {x: 0.85151, y: 0.85151, z: 0.85151}
+  m_LocalPosition: {x: 14.21, y: -0.42, z: 0}
+  m_LocalScale: {x: 1.003249, y: 1.003249, z: 1.003249}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1751,7 +1751,7 @@ Transform:
   m_GameObject: {fileID: 1261975985}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.18, y: -4.57, z: 0}
+  m_LocalPosition: {x: 12.18, y: -4.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2170,6 +2170,10 @@ MonoBehaviour:
   Player: {fileID: 1569064961}
   PlayerAnimator: {fileID: 1569064966}
   IdleAnimation: Idle
+  ReadyAnimation: Ready
+  RunningAnimation: Running
+  HitAnimation: Hit
+  HitAnimationDuration: 0.5
   Backgrounds:
   - {fileID: 438575276}
   - {fileID: 307685148}
@@ -2178,6 +2182,9 @@ MonoBehaviour:
   - {fileID: 1405157713}
   StopSignAnimator: {fileID: 147223904}
   MiniGame: {fileID: 1569064965}
+  YankeeStadium: {fileID: 917589929}
+  ObstaclesBeforeStadium: 5
+  HitsBeforeRestart: 4
 --- !u!4 &1555321101
 Transform:
   m_ObjectHideFlags: 0
@@ -2309,7 +2316,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 7
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5699556224810504833, guid: 21e317ceea2348248bc2247bbb96669d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2331,7 +2338,7 @@ Transform:
   m_GameObject: {fileID: 1569064959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.58, y: -4.21, z: 0}
+  m_LocalPosition: {x: -6.58, y: -4.246, z: 0}
   m_LocalScale: {x: 1.3620868, y: 1.5159981, z: 1.9263}
   m_ConstrainProportionsScale: 0
   m_Children: []
