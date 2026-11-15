@@ -1,5 +1,7 @@
 
+
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class GameManager : MonoBehaviour
     public Animator PlayerAnimator;
 
     public string IdleAnimation = "Idle";
+    public string ReadyAnimation = "Ready";
+    public string RunningAnimation = "Running";
 
     public OngoingScreen[] Backgrounds;
     public OngoingScreen[] Foregrounds;
@@ -34,6 +38,85 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
+        }
+    }
+
+    void Start()
+    {
+        // Save the original speeds before stopping everything
+        SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
+        SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
+
+        StartCoroutine(GameStartSequence());
+    }
+
+    IEnumerator GameStartSequence()
+    {
+        // Stop backgrounds
+        foreach (OngoingScreen Screen in Backgrounds)
+        {
+            Screen.SetSpeed(0);
+        }
+
+        // Stop foregrounds
+        foreach (OngoingScreen Screen in Foregrounds)
+        {
+            Screen.SetSpeed(0);
+        }
+
+        // Stop stop sign animation
+        if (StopSignAnimator != null)
+        {
+            StopSignAnimator.speed = 0;
+        }
+
+        // Stop player movement
+        if (Player != null)
+        {
+            Player.enabled = false;
+        }
+
+        // Play Ready animation
+        if (PlayerAnimator != null)
+        {
+            PlayerAnimator.speed = 1;
+            PlayerAnimator.Play(ReadyAnimation, 0, 0);
+
+            // Wait until Ready animation finishes
+            yield return null;
+
+            while (PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName(ReadyAnimation) &&
+                   PlayerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            {
+                yield return null;
+            }
+
+            // Play Running animation
+            PlayerAnimator.Play(RunningAnimation, 0, 0);
+        }
+
+        // Resume backgrounds
+        foreach (OngoingScreen Screen in Backgrounds)
+        {
+            Screen.SetSpeed(SavedBackgroundSpeed);
+        }
+
+        // Resume foregrounds
+        foreach (OngoingScreen Screen in Foregrounds)
+        {
+            Screen.SetSpeed(SavedForegroundSpeed);
+        }
+
+        // Resume stop sign animation
+        if (StopSignAnimator != null)
+        {
+            StopSignAnimator.speed = 1;
+        }
+
+        // Resume player movement
+        if (Player != null)
+        {
+            Player.enabled = true;
         }
     }
 
