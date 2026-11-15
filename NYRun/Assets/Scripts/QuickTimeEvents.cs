@@ -1,9 +1,21 @@
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
+
 
 public class QuickTimeEvents : MonoBehaviour
 {
+    [Header("Feedbacks")]
+    public UnityEvent darkenScreen;
+
+    public UnityEvent wiggleE;
+    public UnityEvent wiggleF;
+    public UnityEvent wiggleM;
+    public UnityEvent wiggleT;
+    public UnityEvent wiggleA;
+    
     public int KeyPressedAmount = 0;
 
     public char TargetKey;
@@ -35,26 +47,31 @@ public class QuickTimeEvents : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             QuickTimeEvent('E');
+            wiggleE.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
             QuickTimeEvent('F');
+            wiggleF.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
             QuickTimeEvent('M');
+            wiggleM.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
             QuickTimeEvent('T');
+            wiggleT.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
             QuickTimeEvent('A');
+            wiggleA.Invoke();
         }
 
         if (KeyPressedAmount == 10)
@@ -66,9 +83,10 @@ public class QuickTimeEvents : MonoBehaviour
     public void QuickTimeEventStart()
     {
         KeyPressedAmount = 0;
-
+        
         if (QTECanvas != null)
         {
+            darkenScreen.Invoke();
             QTECanvas.SetActive(true);
         }
 

@@ -1,8 +1,12 @@
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerScript : MonoBehaviour
 {
+    [Header("Feedbacks")] 
+    public UnityEvent onJump;
+    
     public Rigidbody2D PlayerPhysics;
     public bool CanJump = false;
     public int JumpForce = 10;
@@ -13,6 +17,7 @@ public class PlayerScript : MonoBehaviour
             if(CanJump)
             {
                 PlayerPhysics.AddForce(new Vector2(0,1)*JumpForce,ForceMode2D.Impulse);
+                onJump.Invoke();
             }
         }
     }
