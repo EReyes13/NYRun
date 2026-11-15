@@ -102,6 +102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8897637669610280807}
   - component: {fileID: 395876312800715143}
+  - component: {fileID: 8257083808261387857}
   m_Layer: 0
   m_Name: Obstacles
   m_TagString: Obstacle
@@ -152,3 +153,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
+--- !u!114 &8257083808261387857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3316571457717369080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f30760630630648ad6408ef7f02fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstacleDestroy
