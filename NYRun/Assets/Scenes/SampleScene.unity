@@ -833,6 +833,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: d45e13bbfe36703488c9fae420c9981d, type: 3}
   m_PrefabInstance: {fileID: 55917963}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &511259475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511259477}
+  - component: {fileID: 511259476}
+  m_Layer: 0
+  m_Name: RainbowManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &511259476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511259475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1e651ee565730428e2a82a8ab53c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RainbowFilter
+  canvasRoot: {fileID: 545412363}
+  rainbowOverlay: {fileID: 1814078479}
+  spriteTrail: {fileID: 1569064967}
+  effectDuration: 10
+  rainbowSpeed: 1.5
+  minimumAlpha: 0.12
+  maximumAlpha: 0.35
+  pulseSpeed: 3
+  gameCamera: {fileID: 519420031}
+  shakeDuration: 0.3
+  shakeStrength: 0.12
+  testWithKey: 1
+  testKey: 112
+--- !u!4 &511259477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511259475}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.69193, y: 3.559, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1127,7 @@ RectTransform:
   - {fileID: 1100863403}
   - {fileID: 220122618}
   - {fileID: 125102011}
+  - {fileID: 1814078481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2127,6 +2185,7 @@ GameObject:
   - component: {fileID: 1569064964}
   - component: {fileID: 1569064965}
   - component: {fileID: 1569064966}
+  - component: {fileID: 1569064967}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2340,6 +2399,109 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1569064967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569064959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a957e37da95464baa8067fc6756f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteTrailRenderer.SpriteTrailRenderer
+  _startScale: {x: 1, y: 1}
+  _endScale: {x: 1, y: 1}
+  _trailLifetime: 1.2
+  _spawnType: 0
+  _timeBetweenTrailSpawn: 0.05
+  _distanceBetweenTrailSpawn: 0.5
+  _trailBehindDistance: 0.15
+  _rainbowCharacter: 1
+  _rainbowSpeed: 1
+  _trailMoveSpeed: 1.5
+  _alphaUpdateOn: 1
+  _maxAlpha: 0.8
+  _minAlpha: 0
+  _useSolidColors: 1
+  _rainbowMode: 1
+  _userSelectedColorPalette: []
+--- !u!1 &1814078478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814078481}
+  - component: {fileID: 1814078480}
+  - component: {fileID: 1814078479}
+  m_Layer: 5
+  m_Name: Rainbow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1814078479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814078478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1814078480
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814078478}
+  m_CullTransparentMesh: 1
+--- !u!224 &1814078481
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814078478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 545412364}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1834679508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,3 +2717,4 @@ SceneRoots:
   - {fileID: 147223906}
   - {fileID: 1365347835}
   - {fileID: 1261975987}
+  - {fileID: 511259477}
