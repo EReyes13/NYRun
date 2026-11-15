@@ -127,13 +127,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //Triggers when the player hits an obstacle that has the obstacle tag on it 
+    public void ObstacleHit()
     {
-        if (collision.CompareTag("Player"))
+        //The player will lose momentum
+        foreach (OngoingScreen Screen in Backgrounds)
         {
-            StartQuickEvent();
+            Screen.ChangeSpeed(-1);
         }
+
+        // Resume foregrounds and increase total speed
+        foreach (OngoingScreen Screen in Foregrounds)
+        {
+            Screen.ChangeSpeed(-2);
+        }
+        
     }
+
+    // private void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if (collision.CompareTag("Player"))
+    //     {
+    //         StartQuickEvent();
+    //     }
+    // }
 }
 
 

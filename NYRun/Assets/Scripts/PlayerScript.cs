@@ -34,6 +34,13 @@ public class PlayerScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        GameManager.Instance.StartQuickEvent();
+        if(other.gameObject.CompareTag("Obstacle"))
+        {
+            GameManager.Instance.ObstacleHit();
+        }
+        else
+        {
+            GameManager.Instance.StartQuickEvent();
+        }
     }
 }

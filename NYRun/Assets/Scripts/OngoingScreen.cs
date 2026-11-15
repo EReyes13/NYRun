@@ -45,7 +45,13 @@ public class OngoingScreen : MonoBehaviour
 
     public void ChangeSpeed(float SpeedChange)
     {
-        scrollSpeed += SpeedChange; 
+        scrollSpeed += SpeedChange;
+        if(scrollSpeed <= 2)
+        {
+            scrollSpeed = 2;
+        }             
+        
+        
     }
 }
 
