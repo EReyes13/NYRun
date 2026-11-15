@@ -2144,6 +2144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   TimeElapsed: 0
   TimerCountdown: 60
+  SavedBackgroundSpeed: 0
+  SavedForegroundSpeed: 0
   Player: {fileID: 1569064961}
   PlayerAnimator: {fileID: 1569064966}
   IdleAnimation: Idle
