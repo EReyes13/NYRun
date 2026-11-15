@@ -1736,7 +1736,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   obstaclePrefabs:
-  - {fileID: 3316571457717369080, guid: adf99820b1b7b144f865704754bf06b3, type: 3}
+  - {fileID: 1971919552219152772, guid: b65e3a0dbff734047b8e9295b030b6ae, type: 3}
+  - {fileID: 3539229046742637074, guid: cb792d914598c90459756ef32a88ad72, type: 3}
+  - {fileID: 9073770759927247462, guid: 6702a2f157f48d14084cae4c587f2110, type: 3}
   obstacleSpawnTime: 4
   obstacleSpeed: 3
 --- !u!4 &1261975987
@@ -2235,6 +2237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
   PlayerPhysics: {fileID: 1569064960}
+  PlayerAnimator: {fileID: 1569064966}
   CanJump: 0
   JumpForce: 10
 --- !u!212 &1569064962
