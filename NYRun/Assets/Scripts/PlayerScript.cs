@@ -6,10 +6,10 @@ public class PlayerScript : MonoBehaviour
 {
     [Header("Feedbacks")] 
     public UnityEvent onJump;
+    public UnityEvent RunningSFX;
+    public UnityEvent pauseRunningSFX;
     
     public Rigidbody2D PlayerPhysics;
-    public Animator PlayerAnimator;
-
     public bool CanJump = false;
     public int JumpForce = 10;
     void Update()
@@ -20,8 +20,6 @@ public class PlayerScript : MonoBehaviour
             {
                 PlayerPhysics.AddForce(new Vector2(0,1)*JumpForce,ForceMode2D.Impulse);
                 onJump.Invoke();
-
-                PlayerAnimator.SetBool("IsJumping", true);
             }
         }
     }
@@ -31,15 +29,15 @@ public class PlayerScript : MonoBehaviour
         if(other.gameObject.CompareTag("Ground"))
         {
             CanJump = true;
-            PlayerAnimator.SetBool("IsJumping", false);
-
             Debug.Log("Grounded");
+            RunningSFX.Invoke();
         }
     }
 
     public void OnCollisionExit2D(Collision2D collision)
     {
         CanJump = false;
+        RunningSFX.Invoke();
         Debug.Log("In Air");
     }
 
