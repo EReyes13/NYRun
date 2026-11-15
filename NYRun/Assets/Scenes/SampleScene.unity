@@ -2264,12 +2264,12 @@ MonoBehaviour:
   KeyPressedAmount: 0
   TargetKey: 0
   QuickTimeKeys: 450046004d0054004100
-  QTECanvas: {fileID: 0}
-  EImage: {fileID: 0}
-  FImage: {fileID: 0}
-  MImage: {fileID: 0}
-  TImage: {fileID: 0}
-  AImage: {fileID: 0}
+  QTECanvas: {fileID: 545412360}
+  EImage: {fileID: 1995895928}
+  FImage: {fileID: 1100863405}
+  MImage: {fileID: 220122620}
+  TImage: {fileID: 125102013}
+  AImage: {fileID: 379858716}
 --- !u!95 &1569064966
 Animator:
   serializedVersion: 7
