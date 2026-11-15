@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public float TimeElapsed;
     public float TimerCountdown = 60;
 
+    public float SavedBackgroundSpeed;
+    public float SavedForegroundSpeed;
+
     public PlayerScript Player;
     public Animator PlayerAnimator;
 
@@ -46,16 +49,19 @@ public class GameManager : MonoBehaviour
 
         QuickEventActive = true;
 
+        //Save current speed in order to preserve momentum
+        SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
+        SavedForegroundSpeed = Foregrounds[0].scrollSpeed; 
         // Stop backgrounds
         foreach (OngoingScreen Screen in Backgrounds)
         {
-            Screen.ChangeSpeed(0);
+            Screen.SetSpeed(0);
         }
 
         // Stop foregrounds
         foreach (OngoingScreen Screen in Foregrounds)
         {
-            Screen.ChangeSpeed(0);
+            Screen.SetSpeed(0);
         }
 
         // Stop stop sign animation
@@ -88,16 +94,18 @@ public class GameManager : MonoBehaviour
 
         QuickEventActive = false;
 
-        // Resume backgrounds
+        // Resume backgrounds and increase the speed
         foreach (OngoingScreen Screen in Backgrounds)
         {
-            Screen.ChangeSpeed(2);
+            Screen.SetSpeed(SavedBackgroundSpeed);
+            Screen.ChangeSpeed(1);
         }
 
-        // Resume foregrounds
+        // Resume foregrounds and increase total speed
         foreach (OngoingScreen Screen in Foregrounds)
         {
-            Screen.ChangeSpeed(8);
+            Screen.ChangeSpeed(SavedForegroundSpeed);
+            Screen.ChangeSpeed(4);
         }
 
         // Resume stop sign animation

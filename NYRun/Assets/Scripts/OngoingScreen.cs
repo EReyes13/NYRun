@@ -38,9 +38,14 @@ public class OngoingScreen : MonoBehaviour
         }
     }
 
-    public void ChangeSpeed(float Speed)
+    public void SetSpeed(float Speed)
     {
         scrollSpeed = Speed;
+    }
+
+    public void ChangeSpeed(float SpeedChange)
+    {
+        scrollSpeed += SpeedChange; 
     }
 }
 
