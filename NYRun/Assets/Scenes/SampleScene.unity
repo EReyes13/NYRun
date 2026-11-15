@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 147223904}
   - component: {fileID: 147223907}
   m_Layer: 0
-  m_Name: stop_morning_0
+  m_Name: Stop_Sign_Morning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -883,12 +883,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511259475}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.69193, y: 3.559, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -952.30804, y: -536.441, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 545412364}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -1128,6 +1128,7 @@ RectTransform:
   - {fileID: 220122618}
   - {fileID: 125102011}
   - {fileID: 1814078481}
+  - {fileID: 511259477}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1736,11 +1737,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
   obstaclePrefabs:
-  - {fileID: 1971919552219152772, guid: b65e3a0dbff734047b8e9295b030b6ae, type: 3}
   - {fileID: 3539229046742637074, guid: cb792d914598c90459756ef32a88ad72, type: 3}
+  - {fileID: 4389883895194804081, guid: 62c0f056dfe878347a636a26578f11e5, type: 3}
   - {fileID: 9073770759927247462, guid: 6702a2f157f48d14084cae4c587f2110, type: 3}
-  obstacleSpawnTime: 4
-  obstacleSpeed: 3
+  obstacleSpawnTime: 3
+  obstacleSpeed: 2
 --- !u!4 &1261975987
 Transform:
   m_ObjectHideFlags: 0
@@ -1877,6 +1878,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b65a45730c85f49b5cbcc88ad137b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuickTimeEvents
+  darkenScreen:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleE:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleF:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleM:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleT:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleA:
+    m_PersistentCalls:
+      m_Calls: []
   KeyPressedAmount: 0
   TargetKey: 0
   QuickTimeKeys: 450046004d0054004100
@@ -2192,7 +2211,7 @@ GameObject:
   - component: {fileID: 1569064967}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2212,7 +2231,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2236,6 +2255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dfa187b87a37d4fa7c2be22c026250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
+  onJump:
+    m_PersistentCalls:
+      m_Calls: []
   PlayerPhysics: {fileID: 1569064960}
   PlayerAnimator: {fileID: 1569064966}
   CanJump: 0
@@ -2294,7 +2316,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.57, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2354,12 +2376,12 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.4, y: 0.74}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.57, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.45, y: 0.74}
   m_EdgeRadius: 0
 --- !u!114 &1569064965
 MonoBehaviour:
@@ -2373,6 +2395,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b65a45730c85f49b5cbcc88ad137b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QuickTimeEvents
+  darkenScreen:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleE:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleF:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleM:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleT:
+    m_PersistentCalls:
+      m_Calls: []
+  wiggleA:
+    m_PersistentCalls:
+      m_Calls: []
   KeyPressedAmount: 0
   TargetKey: 0
   QuickTimeKeys: 450046004d0054004100
@@ -2722,4 +2762,3 @@ SceneRoots:
   - {fileID: 147223906}
   - {fileID: 1365347835}
   - {fileID: 1261975987}
-  - {fileID: 511259477}
