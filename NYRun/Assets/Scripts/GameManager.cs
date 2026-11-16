@@ -30,7 +30,10 @@ public class GameManager : MonoBehaviour
 
     public QuickTimeEvents MiniGame;
 
-    // YANKEE STADIUM
+    // =====================================
+    // LEVEL 1 - YANKEE STADIUM
+    // =====================================
+
     public GameObject YankeeStadium;
     public int ObstaclesBeforeStadium = 5;
 
@@ -38,9 +41,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] NewGameObjects;
 
     public float StadiumPassedX = -15f;
-    public float EnvironmentChangeDelay = 2f;
 
-    // CHRYSLER BUILDING
+    // =====================================
+    // LEVEL 2 - CHRYSLER BUILDING
+    // =====================================
+
     public GameObject ChryslerBuilding;
     public int ObstaclesBeforeChrysler = 7;
 
@@ -49,21 +54,59 @@ public class GameManager : MonoBehaviour
 
     public float ChryslerPassedX = -15f;
 
-    // Obstacle counters
+    // =====================================
+    // LEVEL 3 - MONUMENT BUILDING
+    // =====================================
+
+    public GameObject MonumentBuilding;
+    public int ObstaclesBeforeMonument = 9;
+
+    public GameObject[] MonumentOldGameObjects;
+    public GameObject[] MonumentNewGameObjects;
+
+    public float MonumentPassedX = -15f;
+
+    // =====================================
+    // LEVEL 4 - THE GLOBE
+    // =====================================
+
+    public GameObject Globe;
+    public int ObstaclesBeforeGlobe = 10;
+
+    public GameObject[] GlobeOldGameObjects;
+    public GameObject[] GlobeNewGameObjects;
+
+    public float GlobePassedX = -15f;
+
+    // =====================================
+    // LEVEL 5 - LIGHTHOUSE
+    // =====================================
+
+    public GameObject Lighthouse;
+    public int ObstaclesBeforeLighthouse = 11;
+
+    public GameObject[] LighthouseOldGameObjects;
+    public GameObject[] LighthouseNewGameObjects;
+
+    public float LighthousePassedX = -15f;
+
+    // =====================================
+    // GENERAL SETTINGS
+    // =====================================
+
+    public float EnvironmentChangeDelay = 2f;
+
     public int HitsBeforeRestart = 4;
 
     private int ObstaclesAvoided = 0;
     private int PlayerHits = 0;
 
-    private bool StadiumMoving = false;
-    private bool ChryslerMoving = false;
+    private int CurrentLandmarkStage = 0;
 
-    private bool QuickEventActive = false;
-
+    private bool LandmarkMoving = false;
     private bool EnvironmentChangeStarted = false;
-    private bool ChryslerChangeStarted = false;
 
-    private bool StadiumSequenceComplete = false;
+    public bool QuickEventActive { get; private set; } = false;
 
     void Awake()
     {
@@ -79,18 +122,32 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Save original speeds
         SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
         SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
 
-        // Hide landmarks at the start
+        // Hide all landmarks at the start
         if (YankeeStadium != null)
             YankeeStadium.SetActive(false);
 
         if (ChryslerBuilding != null)
             ChryslerBuilding.SetActive(false);
 
+        if (MonumentBuilding != null)
+            MonumentBuilding.SetActive(false);
+
+        if (Globe != null)
+            Globe.SetActive(false);
+
+        if (Lighthouse != null)
+            Lighthouse.SetActive(false);
+
         StartCoroutine(GameStartSequence());
     }
+
+    // =====================================
+    // GAME START SEQUENCE
+    // =====================================
 
     IEnumerator GameStartSequence()
     {
@@ -135,38 +192,117 @@ public class GameManager : MonoBehaviour
             Player.enabled = true;
     }
 
+    // =====================================
+    // UPDATE - MOVE CURRENT LANDMARK
+    // =====================================
+
     void Update()
     {
-        // Move Yankee Stadium
-        if (StadiumMoving && YankeeStadium != null)
+        GameObject CurrentLandmark = GetCurrentLandmark();
+
+        if (LandmarkMoving && CurrentLandmark != null)
         {
-            YankeeStadium.transform.Translate(
+            CurrentLandmark.transform.Translate(
                 Vector3.left * Backgrounds[0].scrollSpeed * Time.deltaTime
             );
 
             if (!EnvironmentChangeStarted &&
-                YankeeStadium.transform.position.x <= StadiumPassedX)
+                CurrentLandmark.transform.position.x <= GetCurrentPassedX())
             {
                 EnvironmentChangeStarted = true;
+
                 StartCoroutine(ChangeEnvironment());
             }
         }
+    }
 
-        // Move Chrysler Building
-        if (ChryslerMoving && ChryslerBuilding != null)
+    // =====================================
+    // GET CURRENT LANDMARK
+    // =====================================
+
+    GameObject GetCurrentLandmark()
+    {
+        switch (CurrentLandmarkStage)
         {
-            ChryslerBuilding.transform.Translate(
-                Vector3.left * Backgrounds[0].scrollSpeed * Time.deltaTime
-            );
+            case 0:
+                return YankeeStadium;
 
-            if (!ChryslerChangeStarted &&
-                ChryslerBuilding.transform.position.x <= ChryslerPassedX)
-            {
-                ChryslerChangeStarted = true;
-                StartCoroutine(ChangeChryslerEnvironment());
-            }
+            case 1:
+                return ChryslerBuilding;
+
+            case 2:
+                return MonumentBuilding;
+
+            case 3:
+                return Globe;
+
+            case 4:
+                return Lighthouse;
+
+            default:
+                return null;
         }
     }
+
+    // =====================================
+    // GET OBSTACLE REQUIREMENT
+    // =====================================
+
+    int GetObstacleRequirement()
+    {
+        switch (CurrentLandmarkStage)
+        {
+            case 0:
+                return ObstaclesBeforeStadium;
+
+            case 1:
+                return ObstaclesBeforeChrysler;
+
+            case 2:
+                return ObstaclesBeforeMonument;
+
+            case 3:
+                return ObstaclesBeforeGlobe;
+
+            case 4:
+                return ObstaclesBeforeLighthouse;
+
+            default:
+                return int.MaxValue;
+        }
+    }
+
+    // =====================================
+    // GET LANDMARK PASSING POSITION
+    // =====================================
+
+    float GetCurrentPassedX()
+    {
+        switch (CurrentLandmarkStage)
+        {
+            case 0:
+                return StadiumPassedX;
+
+            case 1:
+                return ChryslerPassedX;
+
+            case 2:
+                return MonumentPassedX;
+
+            case 3:
+                return GlobePassedX;
+
+            case 4:
+                return LighthousePassedX;
+
+            default:
+                return -15f;
+        }
+    }
+
+    // =====================================
+    // QUICK TIME EVENTS
+    // =====================================
 
     public void StartQuickEvent()
     {
@@ -228,79 +364,118 @@ public class GameManager : MonoBehaviour
             Player.enabled = true;
     }
 
-    // Called when player avoids an obstacle
+    // =====================================
+    // OBSTACLE AVOIDED
+    // =====================================
+
     public void ObstacleAvoided()
     {
         ObstaclesAvoided++;
 
-        // Spawn Yankee Stadium after 5 obstacles
-        if (ObstaclesAvoided >= ObstaclesBeforeStadium &&
-            !StadiumMoving &&
-            !StadiumSequenceComplete)
+        // Check whether the next landmark should appear
+        if (ObstaclesAvoided >= GetObstacleRequirement() &&
+            !LandmarkMoving &&
+            !EnvironmentChangeStarted)
         {
-            if (YankeeStadium != null)
+            GameObject NextLandmark = GetCurrentLandmark();
+
+            if (NextLandmark != null)
             {
-                YankeeStadium.SetActive(true);
-                StadiumMoving = true;
+                NextLandmark.SetActive(true);
+                LandmarkMoving = true;
+            }
+        }
+    }
+
+    // =====================================
+    // ENVIRONMENT TRANSITION
+    // =====================================
+
+    IEnumerator ChangeEnvironment()
+    {
+        // Wait 2 seconds after landmark passes
+        yield return new WaitForSeconds(EnvironmentChangeDelay);
+
+        // If Lighthouse has completed its sequence,
+        // restart the game and return to Level 1
+        if (CurrentLandmarkStage == 4)
+        {
+            SceneManager.LoadScene(
+                SceneManager.GetActiveScene().buildIndex
+            );
+
+            yield break;
+        }
+
+        GameObject[] OldObjects = null;
+        GameObject[] NewObjects = null;
+
+        // Get the correct GameObject arrays
+        switch (CurrentLandmarkStage)
+        {
+            case 0:
+                OldObjects = OldGameObjects;
+                NewObjects = NewGameObjects;
+                break;
+
+            case 1:
+                OldObjects = ChryslerOldGameObjects;
+                NewObjects = ChryslerNewGameObjects;
+                break;
+
+            case 2:
+                OldObjects = MonumentOldGameObjects;
+                NewObjects = MonumentNewGameObjects;
+                break;
+
+            case 3:
+                OldObjects = GlobeOldGameObjects;
+                NewObjects = GlobeNewGameObjects;
+                break;
+
+            case 4:
+                OldObjects = LighthouseOldGameObjects;
+                NewObjects = LighthouseNewGameObjects;
+                break;
+        }
+
+        // Turn OFF old GameObjects
+        if (OldObjects != null)
+        {
+            foreach (GameObject obj in OldObjects)
+            {
+                if (obj != null)
+                    obj.SetActive(false);
             }
         }
 
-        // Spawn Chrysler Building after 7 MORE obstacles
-        if (StadiumSequenceComplete &&
-            ObstaclesAvoided >= ObstaclesBeforeChrysler &&
-            !ChryslerMoving &&
-            ChryslerBuilding != null)
+        // Turn ON new GameObjects
+        if (NewObjects != null)
         {
-            ChryslerBuilding.SetActive(true);
-            ChryslerMoving = true;
-        }
-    }
-
-    // Yankee Stadium environment transition
-    IEnumerator ChangeEnvironment()
-    {
-        yield return new WaitForSeconds(EnvironmentChangeDelay);
-
-        foreach (GameObject obj in OldGameObjects)
-        {
-            if (obj != null)
-                obj.SetActive(false);
+            foreach (GameObject obj in NewObjects)
+            {
+                if (obj != null)
+                    obj.SetActive(true);
+            }
         }
 
-        foreach (GameObject obj in NewGameObjects)
-        {
-            if (obj != null)
-                obj.SetActive(true);
-        }
+        // Stop current landmark
+        LandmarkMoving = false;
 
-        StadiumMoving = false;
-        StadiumSequenceComplete = true;
+        // Move to the next landmark stage
+        CurrentLandmarkStage++;
 
-        // Reset counter for the next 7 obstacles
+        // Reset obstacle counter
         ObstaclesAvoided = 0;
+
+        // Allow next landmark to appear
+        EnvironmentChangeStarted = false;
     }
 
-    // Chrysler Building environment transition
-    IEnumerator ChangeChryslerEnvironment()
-    {
-        yield return new WaitForSeconds(EnvironmentChangeDelay);
+    // =====================================
+    // OBSTACLE HIT
+    // =====================================
 
-        foreach (GameObject obj in ChryslerOldGameObjects)
-        {
-            if (obj != null)
-                obj.SetActive(false);
-        }
-
-        foreach (GameObject obj in ChryslerNewGameObjects)
-        {
-            if (obj != null)
-                obj.SetActive(true);
-        }
-
-        ChryslerMoving = false;
-    }
-
-    // Called when player hits an obstacle
     public void ObstacleHit()
     {
         PlayerHits++;
@@ -322,6 +497,10 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+    // =====================================
+    // HIT ANIMATION
+    // =====================================
 
     IEnumerator PlayHitAnimation()
     {
