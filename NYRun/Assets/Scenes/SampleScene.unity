@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 147223907}
   m_Layer: 0
   m_Name: Stop_Sign_Morning
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2519,16 +2519,11 @@ MonoBehaviour:
   SavedForegroundSpeed: 0
   Player: {fileID: 1569064961}
   PlayerAnimator: {fileID: 1569064966}
-  PlayerCollider: {fileID: 1569064964}
   IdleAnimation: Idle
   ReadyAnimation: Ready
   RunningAnimation: Running
   HitAnimation: Hit
-  GameOverAnimation: GameOver
   HitAnimationDuration: 0.5
-  ReadyAnimationDuration: 1.5
-  RestartDelay: 3.5
-  GameOverStopDuration: 1.5
   Backgrounds:
   - {fileID: 438575276}
   - {fileID: 307685148}
@@ -2539,10 +2534,6 @@ MonoBehaviour:
   - {fileID: 1405157713}
   - {fileID: 152217628}
   - {fileID: 869758110}
-  AlternateBackgrounds: []
-  BackgroundFadeDuration: 1
-  StadiumBackgroundDelay: 2
-  MainCamera: {fileID: 519420031}
   StopSignAnimator: {fileID: 147223904}
   MiniGame: {fileID: 1569064965}
   YankeeStadium: {fileID: 917589929}
@@ -2625,8 +2616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dfa187b87a37d4fa7c2be22c026250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
-  PlayerPhysics: {fileID: 1569064960}
-  PlayerAnimator: {fileID: 1569064966}
   onJump:
     m_PersistentCalls:
       m_Calls:
@@ -2642,8 +2631,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  JumpForce: 10
+  RunningSFX:
+    m_PersistentCalls:
+      m_Calls: []
+  pauseRunningSFX:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerPhysics: {fileID: 1569064960}
   CanJump: 1
+  JumpForce: 10
 --- !u!212 &1569064962
 SpriteRenderer:
   serializedVersion: 3

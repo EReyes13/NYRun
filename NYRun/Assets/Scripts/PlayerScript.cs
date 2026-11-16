@@ -39,6 +39,7 @@ public class PlayerScript : MonoBehaviour
         CanJump = false;
         RunningSFX.Invoke();
         Debug.Log("In Air");
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -50,6 +51,14 @@ public class PlayerScript : MonoBehaviour
         else
         {
             GameManager.Instance.StartQuickEvent();
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+                if(collision.gameObject.CompareTag("Checkpoint"))
+        {
+            GameManager.Instance.QuickEventActive = true;
         }
     }
 }

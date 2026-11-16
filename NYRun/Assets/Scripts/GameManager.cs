@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     private int PlayerHits = 0;
 
     private bool StadiumMoving = false;
-    private bool QuickEventActive = false;
+    public bool QuickEventActive = false;
 
     void Awake()
     {
@@ -199,10 +199,7 @@ public class GameManager : MonoBehaviour
 
     public void EndQuickEvent()
     {
-        if (!QuickEventActive)
-            return;
-
-        QuickEventActive = false;
+        
 
         // Resume backgrounds and increase the speed
         foreach (OngoingScreen Screen in Backgrounds)
