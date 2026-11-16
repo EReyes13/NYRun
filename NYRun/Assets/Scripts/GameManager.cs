@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     public QuickTimeEvents MiniGame;
 
+    public Spawner ObstacleSpawner;
+
     // =====================================
     // LEVEL 1 - YANKEE STADIUM
     // =====================================
@@ -421,11 +423,14 @@ public class GameManager : MonoBehaviour
             case 1:
                 OldObjects = ChryslerOldGameObjects;
                 NewObjects = ChryslerNewGameObjects;
+                ObstacleSpawner.obstacleSpeed = 5;
                 break;
+                
 
             case 2:
                 OldObjects = MonumentOldGameObjects;
                 NewObjects = MonumentNewGameObjects;
+                ObstacleSpawner.obstacleSpeed = 6;
                 break;
 
             case 3:
