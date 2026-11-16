@@ -145,8 +145,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39327870}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1031075, y: 3.0805101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.7, y: -0.82, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -328,8 +328,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68560503}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.23689, y: 1.9705101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.8, y: -1.93, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 3
+  scrollSpeed: 8
   otherBackground: {fileID: 1829312242}
 --- !u!212 &68560506
 SpriteRenderer:
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 3
+  scrollSpeed: 8
   otherBackground: {fileID: 1624864804}
 --- !u!212 &122304077
 SpriteRenderer:
@@ -601,8 +601,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122304075}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.613108, y: 1.9705101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.119999, y: -1.93, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -709,8 +709,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128834418}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.073109, y: 5.19051, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.8, y: 1.29, z: 0}
   m_LocalScale: {x: 3.251542, y: 3.251542, z: 3.251542}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 2
+  scrollSpeed: 8
   otherBackground: {fileID: 869758112}
 --- !u!1 &202092800
 GameObject:
@@ -1367,8 +1367,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 266964703}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.7368903, y: 5.19051, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.5, y: 1.29, z: 0}
   m_LocalScale: {x: 3.251542, y: 3.251542, z: 3.251542}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2146,8 +2146,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607740138}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.756893, y: 5.19051, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.9699965, y: 1.29, z: 0}
   m_LocalScale: {x: 3.251542, y: 3.251542, z: 3.251542}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2426,8 +2426,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774000491}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36.56689, y: 5.19051, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.669998, y: 1.29, z: 0}
   m_LocalScale: {x: 3.251542, y: 3.251542, z: 3.251542}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2639,7 +2639,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2184118486336932944, guid: 8d45ca9ecd20b9b4f82be11bfc2755be, type: 3}
-  m_Color: {r: 0.4693043, g: 0.09703802, b: 0.87169814, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2694,7 +2694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 2
+  scrollSpeed: 8
   otherBackground: {fileID: 152217627}
 --- !u!212 &869758111
 SpriteRenderer:
@@ -3070,8 +3070,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969292407}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.046892, y: 3.0805101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.550001, y: -0.82, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3163,8 +3163,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979690073}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.416893, y: 1.9705101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.219997, y: -1.93, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3182,7 +3182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 2
+  scrollSpeed: 8
   otherBackground: {fileID: 1318548145}
 --- !u!1 &1004538033
 GameObject:
@@ -3362,8 +3362,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1037671411}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.496893, y: 3.0805101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.75, y: -0.82, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3469,8 +3469,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061638679}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.4831085, y: 5.19051, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 40.83, y: 1.29, z: 0}
   m_LocalScale: {x: 3.251542, y: 3.251542, z: 3.251542}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3576,8 +3576,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068947538}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -28.646893, y: 3.0805101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.6, y: -0.82, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3808,8 +3808,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318548143}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.836891, y: 1.9705101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.8, y: -1.93, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3827,7 +3827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 2
+  scrollSpeed: 8
   otherBackground: {fileID: 979690075}
 --- !u!1 &1365347833
 GameObject:
@@ -4601,8 +4601,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1624864803}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.8068905, y: 1.9705101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.7, y: -1.93, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4620,7 +4620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 3
+  scrollSpeed: 8
   otherBackground: {fileID: 122304078}
 --- !u!212 &1624864806
 SpriteRenderer:
@@ -4708,8 +4708,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643113525}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.346893, y: 5.19051, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 1.29, z: 0}
   m_LocalScale: {x: 3.251542, y: 3.251542, z: 3.251542}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5108,7 +5108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e190ec3f2618c46b8b28cbece26965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OngoingScreen
-  scrollSpeed: 3
+  scrollSpeed: 8
   otherBackground: {fileID: 68560504}
 --- !u!212 &1829312241
 SpriteRenderer:
@@ -5178,8 +5178,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1829312239}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1831074, y: 1.9705101, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.219997, y: -1.93, z: 0}
   m_LocalScale: {x: 2.5981, y: 2.5981, z: 2.5981}
   m_ConstrainProportionsScale: 0
   m_Children: []

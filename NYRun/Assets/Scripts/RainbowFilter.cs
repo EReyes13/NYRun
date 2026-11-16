@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class RainbowFilter : MonoBehaviour
 {
@@ -37,13 +36,11 @@ public class RainbowFilter : MonoBehaviour
     private Coroutine activeEffect;
     private Vector3 originalCameraPosition;
 
-    // Save the character's original colors.
     private SpriteRenderer[] characterRenderers;
     private Color[] originalCharacterColors;
 
     private void Start()
     {
-        // Find all character SpriteRenderers.
         if (spriteTrail != null)
         {
             characterRenderers =
@@ -58,11 +55,9 @@ public class RainbowFilter : MonoBehaviour
                     characterRenderers[i].color;
             }
 
-            // Keep the character's rainbow trail disabled initially.
             spriteTrail.enabled = false;
         }
 
-        // Keep the rainbow overlay hidden initially.
         if (rainbowOverlay != null)
         {
             rainbowOverlay.color = Color.clear;
@@ -88,7 +83,7 @@ public class RainbowFilter : MonoBehaviour
             return;
         }
 
-        // Restart the effect if P is pressed again.
+        // Restart the visual effect if activated again.
         if (activeEffect != null)
         {
             StopCoroutine(activeEffect);
@@ -100,15 +95,18 @@ public class RainbowFilter : MonoBehaviour
             }
         }
 
-        // Turn on the Canvas.
+        // Activate the gameplay speed boost.
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ActivateStarPowerUp(effectDuration);
+        }
+
         canvasRoot.gameObject.SetActive(true);
 
-        // Turn off all Canvas objects except the rainbow.
         DisableCanvasChildrenExceptRainbow(canvasRoot.transform);
 
         rainbowOverlay.gameObject.SetActive(true);
 
-        // Turn on the character's rainbow trail.
         if (spriteTrail != null)
         {
             spriteTrail.enabled = true;
@@ -174,7 +172,6 @@ public class RainbowFilter : MonoBehaviour
             );
 
             rainbowColor.a = alpha * fadeOut;
-
             rainbowOverlay.color = rainbowColor;
 
             // Camera shake.
@@ -206,20 +203,18 @@ public class RainbowFilter : MonoBehaviour
         // Restore the original screen appearance.
         rainbowOverlay.color = Color.clear;
 
-        // Restore the camera position.
         if (gameCamera != null)
         {
             gameCamera.transform.localPosition =
                 originalCameraPosition;
         }
 
-        // Turn off the character's rainbow trail.
         if (spriteTrail != null)
         {
             spriteTrail.enabled = false;
         }
 
-        // Restore every character part to its original color.
+        // Restore the character's original colors.
         if (characterRenderers != null &&
             originalCharacterColors != null)
         {

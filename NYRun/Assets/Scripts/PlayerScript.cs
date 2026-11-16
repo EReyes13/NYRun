@@ -50,11 +50,29 @@ public class PlayerScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            GameManager.Instance.ObstacleHit();
+            if (GameManager.Instance != null &&
+                GameManager.Instance.IsPowerUpActive)
+            {
+                Debug.Log("STAR POWER! Obstacle destroyed!");
+
+                GameManager.Instance.ObstacleAvoided();
+
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.ObstacleHit();
+                }
+            }
         }
         else
         {
-            GameManager.Instance.StartQuickEvent();
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.StartQuickEvent();
+            }
         }
     }
 
@@ -63,7 +81,6 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Checkpoint"))
         {
             // QuickEventActive is managed by GameManager.
-            // No assignment is needed here.
         }
     }
 }

@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class OngoingScreen : MonoBehaviour
@@ -9,6 +10,20 @@ public class OngoingScreen : MonoBehaviour
     private Camera mainCamera;
     private float backgroundWidth;
 
+    private float originalScrollSpeed;
+    private float powerUpMultiplier = 1f;
+
+    public float BaseScrollSpeed
+    {
+        get { return originalScrollSpeed; }
+    }
+
+    void Awake()
+    {
+        // Remember the normal speed before other scripts change it.
+        originalScrollSpeed = scrollSpeed;
+    }
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -19,17 +34,14 @@ public class OngoingScreen : MonoBehaviour
 
     void Update()
     {
-        // Move background to the left
-        transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
+        transform.position +=
+            Vector3.left * scrollSpeed * Time.deltaTime;
 
-        // Find the left edge of the camera
         float cameraLeftEdge = mainCamera.transform.position.x -
             mainCamera.orthographicSize * mainCamera.aspect;
 
-        // Check if the background has completely left the screen
         if (spriteRenderer.bounds.max.x <= cameraLeftEdge)
         {
-            // Reset it directly behind the other background
             transform.position = new Vector3(
                 otherBackground.position.x + backgroundWidth,
                 transform.position.y,
@@ -40,18 +52,31 @@ public class OngoingScreen : MonoBehaviour
 
     public void SetSpeed(float Speed)
     {
-        scrollSpeed = Speed;
+        originalScrollSpeed = Speed;
+        UpdateEffectiveSpeed();
     }
 
     public void ChangeSpeed(float SpeedChange)
     {
-        scrollSpeed += SpeedChange;
-        if(scrollSpeed <= 2)
+        originalScrollSpeed += SpeedChange;
+
+        if (originalScrollSpeed <= 2)
         {
-            scrollSpeed = 2;
-        }             
-        
-        
+            originalScrollSpeed = 2;
+        }
+
+        UpdateEffectiveSpeed();
+    }
+
+    public void SetPowerUpMultiplier(float multiplier)
+    {
+        powerUpMultiplier = multiplier;
+        UpdateEffectiveSpeed();
+    }
+
+    private void UpdateEffectiveSpeed()
+    {
+        scrollSpeed = originalScrollSpeed * powerUpMultiplier;
     }
 }
 

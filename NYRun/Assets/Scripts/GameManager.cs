@@ -33,6 +33,16 @@ public class GameManager : MonoBehaviour
     public Spawner ObstacleSpawner;
 
     // =====================================
+    // STAR POWER-UP SETTINGS
+    // =====================================
+
+    public float PowerUpSpeedMultiplier = 2f;
+
+    public bool IsPowerUpActive { get; private set; } = false;
+
+    private Coroutine PowerUpCoroutine;
+
+    // =====================================
     // LEVEL 1 - YANKEE STADIUM
     // =====================================
 
@@ -110,6 +120,10 @@ public class GameManager : MonoBehaviour
 
     public bool QuickEventActive { get; private set; } = false;
 
+    // =====================================
+    // AWAKE
+    // =====================================
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -122,13 +136,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // =====================================
+    // START
+    // =====================================
+
     void Start()
     {
-        // Save original speeds
-        SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
-        SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
+        // Save the original speeds.
+        SavedBackgroundSpeed = Backgrounds[0].BaseScrollSpeed;
+        SavedForegroundSpeed = Foregrounds[0].BaseScrollSpeed;
 
-        // Hide all landmarks at the start
+        // Hide all landmarks at the start.
         if (YankeeStadium != null)
             YankeeStadium.SetActive(false);
 
@@ -172,8 +190,10 @@ public class GameManager : MonoBehaviour
 
             yield return null;
 
-            while (PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName(ReadyAnimation) &&
-                   PlayerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+            while (
+                PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName(ReadyAnimation) &&
+                PlayerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+            )
             {
                 yield return null;
             }
@@ -208,8 +228,10 @@ public class GameManager : MonoBehaviour
                 Vector3.left * Backgrounds[0].scrollSpeed * Time.deltaTime
             );
 
-            if (!EnvironmentChangeStarted &&
-                CurrentLandmark.transform.position.x <= GetCurrentPassedX())
+            if (
+                !EnvironmentChangeStarted &&
+                CurrentLandmark.transform.position.x <= GetCurrentPassedX()
+            )
             {
                 EnvironmentChangeStarted = true;
 
@@ -313,8 +335,8 @@ public class GameManager : MonoBehaviour
 
         QuickEventActive = true;
 
-        SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
-        SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
+        SavedBackgroundSpeed = Backgrounds[0].BaseScrollSpeed;
+        SavedForegroundSpeed = Foregrounds[0].BaseScrollSpeed;
 
         foreach (OngoingScreen Screen in Backgrounds)
             Screen.SetSpeed(0);
@@ -334,7 +356,8 @@ public class GameManager : MonoBehaviour
             PlayerAnimator.speed = 0;
         }
 
-        MiniGame.QuickTimeEventStart();
+        if (MiniGame != null)
+            MiniGame.QuickTimeEventStart();
     }
 
     public void EndQuickEvent()
@@ -352,7 +375,7 @@ public class GameManager : MonoBehaviour
 
         foreach (OngoingScreen Screen in Foregrounds)
         {
-            Screen.ChangeSpeed(SavedForegroundSpeed);
+            Screen.SetSpeed(SavedForegroundSpeed);
             Screen.ChangeSpeed(4);
         }
 
@@ -367,6 +390,47 @@ public class GameManager : MonoBehaviour
     }
 
     // =====================================
+    // STAR POWER-UP
+    // =====================================
+
+    public void ActivateStarPowerUp(float duration)
+    {
+        if (PowerUpCoroutine != null)
+        {
+            StopCoroutine(PowerUpCoroutine);
+        }
+
+        IsPowerUpActive = true;
+
+        foreach (OngoingScreen Screen in Backgrounds)
+            Screen.SetPowerUpMultiplier(PowerUpSpeedMultiplier);
+
+        foreach (OngoingScreen Screen in Foregrounds)
+            Screen.SetPowerUpMultiplier(PowerUpSpeedMultiplier);
+
+        PowerUpCoroutine = StartCoroutine(StarPowerUpTimer(duration));
+
+        Debug.Log("STAR POWER ACTIVATED!");
+    }
+
+    IEnumerator StarPowerUpTimer(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        IsPowerUpActive = false;
+
+        foreach (OngoingScreen Screen in Backgrounds)
+            Screen.SetPowerUpMultiplier(1f);
+
+        foreach (OngoingScreen Screen in Foregrounds)
+            Screen.SetPowerUpMultiplier(1f);
+
+        PowerUpCoroutine = null;
+
+        Debug.Log("STAR POWER-UP ENDED!");
+    }
+
+    // =====================================
     // OBSTACLE AVOIDED
     // =====================================
 
@@ -374,10 +438,12 @@ public class GameManager : MonoBehaviour
     {
         ObstaclesAvoided++;
 
-        // Check whether the next landmark should appear
-        if (ObstaclesAvoided >= GetObstacleRequirement() &&
+        // Check whether the next landmark should appear.
+        if (
+            ObstaclesAvoided >= GetObstacleRequirement() &&
             !LandmarkMoving &&
-            !EnvironmentChangeStarted)
+            !EnvironmentChangeStarted
+        )
         {
             GameObject NextLandmark = GetCurrentLandmark();
 
@@ -395,11 +461,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ChangeEnvironment()
     {
-        // Wait 2 seconds after landmark passes
+        // Wait 2 seconds after landmark passes.
         yield return new WaitForSeconds(EnvironmentChangeDelay);
 
         // If Lighthouse has completed its sequence,
-        // restart the game and return to Level 1
+        // restart the game and return to Level 1.
         if (CurrentLandmarkStage == 4)
         {
             SceneManager.LoadScene(
@@ -412,7 +478,7 @@ public class GameManager : MonoBehaviour
         GameObject[] OldObjects = null;
         GameObject[] NewObjects = null;
 
-        // Get the correct GameObject arrays
+        // Get the correct GameObject arrays.
         switch (CurrentLandmarkStage)
         {
             case 0:
@@ -444,7 +510,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        // Turn OFF old GameObjects
+        // Turn OFF old GameObjects.
         if (OldObjects != null)
         {
             foreach (GameObject obj in OldObjects)
@@ -454,7 +520,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Turn ON new GameObjects
+        // Turn ON new GameObjects.
         if (NewObjects != null)
         {
             foreach (GameObject obj in NewObjects)
@@ -464,16 +530,16 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // Stop current landmark
+        // Stop current landmark.
         LandmarkMoving = false;
 
-        // Move to the next landmark stage
+        // Move to the next landmark stage.
         CurrentLandmarkStage++;
 
-        // Reset obstacle counter
+        // Reset obstacle counter.
         ObstaclesAvoided = 0;
 
-        // Allow next landmark to appear
+        // Allow next landmark to appear.
         EnvironmentChangeStarted = false;
     }
 
@@ -483,6 +549,13 @@ public class GameManager : MonoBehaviour
 
     public void ObstacleHit()
     {
+        // Do not count hits or restart during Star Power.
+        if (IsPowerUpActive)
+        {
+            Debug.Log("STAR POWER! Player is protected!");
+            return;
+        }
+
         PlayerHits++;
 
         if (PlayerAnimator != null && !QuickEventActive)
@@ -499,7 +572,9 @@ public class GameManager : MonoBehaviour
 
         if (PlayerHits >= HitsBeforeRestart)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(
+                SceneManager.GetActiveScene().buildIndex
+            );
         }
     }
 
@@ -517,5 +592,6 @@ public class GameManager : MonoBehaviour
             PlayerAnimator.Play(RunningAnimation, 0, 0);
     }
 }
+
 
 
