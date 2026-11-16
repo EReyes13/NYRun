@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     public Spawner ObstacleSpawner;
 
+    public RainbowFilter StarPower;
+
     // =====================================
     // STAR POWER-UP SETTINGS
     // =====================================
@@ -409,6 +411,7 @@ public class GameManager : MonoBehaviour
             Screen.SetPowerUpMultiplier(PowerUpSpeedMultiplier);
 
         PowerUpCoroutine = StartCoroutine(StarPowerUpTimer(duration));
+        StarPower.testWithKey = false;
 
         Debug.Log("STAR POWER ACTIVATED!");
     }
@@ -541,6 +544,10 @@ public class GameManager : MonoBehaviour
 
         // Allow next landmark to appear.
         EnvironmentChangeStarted = false;
+
+        //Activate the StarPower
+        StarPower.testWithKey = true;
+
     }
 
     // =====================================
@@ -573,7 +580,7 @@ public class GameManager : MonoBehaviour
         if (PlayerHits >= HitsBeforeRestart)
         {
             SceneManager.LoadScene(
-                SceneManager.GetActiveScene().buildIndex
+                2
             );
         }
     }

@@ -30,7 +30,7 @@ public class RainbowFilter : MonoBehaviour
     public float shakeStrength = 0.12f;
 
     [Header("Testing")]
-    public bool testWithKey = true;
+    public bool testWithKey = false;
     public KeyCode testKey = KeyCode.P;
 
     private Coroutine activeEffect;
