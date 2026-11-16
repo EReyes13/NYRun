@@ -30,9 +30,24 @@ public class GameManager : MonoBehaviour
 
     public QuickTimeEvents MiniGame;
 
-    // Yankee Stadium
+    // YANKEE STADIUM
     public GameObject YankeeStadium;
     public int ObstaclesBeforeStadium = 5;
+
+    public GameObject[] OldGameObjects;
+    public GameObject[] NewGameObjects;
+
+    public float StadiumPassedX = -15f;
+    public float EnvironmentChangeDelay = 2f;
+
+    // CHRYSLER BUILDING
+    public GameObject ChryslerBuilding;
+    public int ObstaclesBeforeChrysler = 7;
+
+    public GameObject[] ChryslerOldGameObjects;
+    public GameObject[] ChryslerNewGameObjects;
+
+    public float ChryslerPassedX = -15f;
 
     // Obstacle counters
     public int HitsBeforeRestart = 4;
@@ -41,7 +56,18 @@ public class GameManager : MonoBehaviour
     private int PlayerHits = 0;
 
     private bool StadiumMoving = false;
+<<<<<<< Updated upstream
     public bool QuickEventActive = false;
+=======
+    private bool ChryslerMoving = false;
+
+    private bool QuickEventActive = false;
+>>>>>>> Stashed changes
+
+    private bool EnvironmentChangeStarted = false;
+    private bool ChryslerChangeStarted = false;
+
+    private bool StadiumSequenceComplete = false;
 
     void Awake()
     {
@@ -57,52 +83,38 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Save the original speeds before stopping everything
         SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
         SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
 
-        // Keep Yankee Stadium hidden at the start
+        // Hide landmarks at the start
         if (YankeeStadium != null)
-        {
             YankeeStadium.SetActive(false);
-        }
+
+        if (ChryslerBuilding != null)
+            ChryslerBuilding.SetActive(false);
 
         StartCoroutine(GameStartSequence());
     }
 
     IEnumerator GameStartSequence()
     {
-        // Stop backgrounds
         foreach (OngoingScreen Screen in Backgrounds)
-        {
             Screen.SetSpeed(0);
-        }
 
-        // Stop foregrounds
         foreach (OngoingScreen Screen in Foregrounds)
-        {
             Screen.SetSpeed(0);
-        }
 
-        // Stop stop sign animation
         if (StopSignAnimator != null)
-        {
             StopSignAnimator.speed = 0;
-        }
 
-        // Stop player movement
         if (Player != null)
-        {
             Player.enabled = false;
-        }
 
-        // Play Ready animation
         if (PlayerAnimator != null)
         {
             PlayerAnimator.speed = 1;
             PlayerAnimator.Play(ReadyAnimation, 0, 0);
 
-            // Wait until Ready animation finishes
             yield return null;
 
             while (PlayerAnimator.GetCurrentAnimatorStateInfo(0).IsName(ReadyAnimation) &&
@@ -111,43 +123,52 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
-            // Play Running animation
             PlayerAnimator.Play(RunningAnimation, 0, 0);
         }
 
-        // Resume backgrounds
         foreach (OngoingScreen Screen in Backgrounds)
-        {
             Screen.SetSpeed(SavedBackgroundSpeed);
-        }
 
-        // Resume foregrounds
         foreach (OngoingScreen Screen in Foregrounds)
-        {
             Screen.SetSpeed(SavedForegroundSpeed);
-        }
 
-        // Resume stop sign animation
         if (StopSignAnimator != null)
-        {
             StopSignAnimator.speed = 1;
-        }
 
-        // Resume player movement
         if (Player != null)
-        {
             Player.enabled = true;
-        }
     }
 
     void Update()
     {
-        // Move Yankee Stadium from right to left
+        // Move Yankee Stadium
         if (StadiumMoving && YankeeStadium != null)
         {
             YankeeStadium.transform.Translate(
                 Vector3.left * Backgrounds[0].scrollSpeed * Time.deltaTime
             );
+
+            if (!EnvironmentChangeStarted &&
+                YankeeStadium.transform.position.x <= StadiumPassedX)
+            {
+                EnvironmentChangeStarted = true;
+                StartCoroutine(ChangeEnvironment());
+            }
+        }
+
+        // Move Chrysler Building
+        if (ChryslerMoving && ChryslerBuilding != null)
+        {
+            ChryslerBuilding.transform.Translate(
+                Vector3.left * Backgrounds[0].scrollSpeed * Time.deltaTime
+            );
+
+            if (!ChryslerChangeStarted &&
+                ChryslerBuilding.transform.position.x <= ChryslerPassedX)
+            {
+                ChryslerChangeStarted = true;
+                StartCoroutine(ChangeChryslerEnvironment());
+            }
         }
     }
 
@@ -158,42 +179,27 @@ public class GameManager : MonoBehaviour
 
         QuickEventActive = true;
 
-        // Save current speed in order to preserve momentum
         SavedBackgroundSpeed = Backgrounds[0].scrollSpeed;
         SavedForegroundSpeed = Foregrounds[0].scrollSpeed;
 
-        // Stop backgrounds
         foreach (OngoingScreen Screen in Backgrounds)
-        {
             Screen.SetSpeed(0);
-        }
 
-        // Stop foregrounds
         foreach (OngoingScreen Screen in Foregrounds)
-        {
             Screen.SetSpeed(0);
-        }
 
-        // Stop stop sign animation
         if (StopSignAnimator != null)
-        {
             StopSignAnimator.speed = 0;
-        }
 
-        // Stop player movement
         if (Player != null)
-        {
             Player.enabled = false;
-        }
 
-        // Return player to idle animation
         if (PlayerAnimator != null)
         {
             PlayerAnimator.Play(IdleAnimation, 0, 0);
             PlayerAnimator.speed = 0;
         }
 
-        // Start QTE
         MiniGame.QuickTimeEventStart();
     }
 
@@ -201,45 +207,37 @@ public class GameManager : MonoBehaviour
     {
         
 
-        // Resume backgrounds and increase the speed
         foreach (OngoingScreen Screen in Backgrounds)
         {
             Screen.SetSpeed(SavedBackgroundSpeed);
             Screen.ChangeSpeed(1);
         }
 
-        // Resume foregrounds and increase total speed
         foreach (OngoingScreen Screen in Foregrounds)
         {
             Screen.ChangeSpeed(SavedForegroundSpeed);
             Screen.ChangeSpeed(4);
         }
 
-        // Resume stop sign animation
         if (StopSignAnimator != null)
-        {
             StopSignAnimator.speed = 1;
-        }
 
-        // Resume player animation
         if (PlayerAnimator != null)
-        {
             PlayerAnimator.speed = 1;
-        }
 
-        // Resume player movement
         if (Player != null)
-        {
             Player.enabled = true;
-        }
     }
 
-    // Called when the player avoids an obstacle
+    // Called when player avoids an obstacle
     public void ObstacleAvoided()
     {
         ObstaclesAvoided++;
 
-        if (ObstaclesAvoided >= ObstaclesBeforeStadium && !StadiumMoving)
+        // Spawn Yankee Stadium after 5 obstacles
+        if (ObstaclesAvoided >= ObstaclesBeforeStadium &&
+            !StadiumMoving &&
+            !StadiumSequenceComplete)
         {
             if (YankeeStadium != null)
             {
@@ -247,33 +245,79 @@ public class GameManager : MonoBehaviour
                 StadiumMoving = true;
             }
         }
+
+        // Spawn Chrysler Building after 7 MORE obstacles
+        if (StadiumSequenceComplete &&
+            ObstaclesAvoided >= ObstaclesBeforeChrysler &&
+            !ChryslerMoving &&
+            ChryslerBuilding != null)
+        {
+            ChryslerBuilding.SetActive(true);
+            ChryslerMoving = true;
+        }
     }
 
-    // Called when the player hits an obstacle
+    // Yankee Stadium environment transition
+    IEnumerator ChangeEnvironment()
+    {
+        yield return new WaitForSeconds(EnvironmentChangeDelay);
+
+        foreach (GameObject obj in OldGameObjects)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+
+        foreach (GameObject obj in NewGameObjects)
+        {
+            if (obj != null)
+                obj.SetActive(true);
+        }
+
+        StadiumMoving = false;
+        StadiumSequenceComplete = true;
+
+        // Reset counter for the next 7 obstacles
+        ObstaclesAvoided = 0;
+    }
+
+    // Chrysler Building environment transition
+    IEnumerator ChangeChryslerEnvironment()
+    {
+        yield return new WaitForSeconds(EnvironmentChangeDelay);
+
+        foreach (GameObject obj in ChryslerOldGameObjects)
+        {
+            if (obj != null)
+                obj.SetActive(false);
+        }
+
+        foreach (GameObject obj in ChryslerNewGameObjects)
+        {
+            if (obj != null)
+                obj.SetActive(true);
+        }
+
+        ChryslerMoving = false;
+    }
+
+    // Called when player hits an obstacle
     public void ObstacleHit()
     {
         PlayerHits++;
 
-        // Play Hit animation
         if (PlayerAnimator != null && !QuickEventActive)
         {
             StopCoroutine(nameof(PlayHitAnimation));
             StartCoroutine(PlayHitAnimation());
         }
 
-        // The player will lose momentum
         foreach (OngoingScreen Screen in Backgrounds)
-        {
             Screen.ChangeSpeed(-1);
-        }
 
-        // Reduce foreground speed
         foreach (OngoingScreen Screen in Foregrounds)
-        {
             Screen.ChangeSpeed(-2);
-        }
 
-        // Restart level after three hits
         if (PlayerHits >= HitsBeforeRestart)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -287,18 +331,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(HitAnimationDuration);
 
         if (!QuickEventActive)
-        {
             PlayerAnimator.Play(RunningAnimation, 0, 0);
-        }
     }
-
-    // private void OnTriggerEnter2D(Collider2D collision)
-    // {
-    //     if (collision.CompareTag("Player"))
-    //     {
-    //         StartQuickEvent();
-    //     }
-    // }
 }
+
 
 
